@@ -148,6 +148,22 @@ impl<'info> InitializeHonoraryPosition<'info> {
         )?;
 
         msg!("Honorary quote-only fee position created successfully!");
+        
+        // Emit event
+        emit!(crate::events::HonoraryPositionInitialized {
+            pool: ctx.accounts.pool.key(),
+            position: ctx.accounts.position.key(),
+            position_nft_mint: ctx.accounts.position_nft_mint.key(),
+            base_mint: ctx.accounts.base_mint.key(),
+            quote_mint: ctx.accounts.quote_mint.key(),
+            base_weight_bps: config.base_weight_bps,
+            quote_weight_bps: config.quote_weight_bps,
+            lower_tick: config.lower_tick,
+            upper_tick: config.upper_tick,
+            fee_tier: config.fee_tier,
+            timestamp: Clock::get()?.unix_timestamp,
+        });
+        
         Ok(())
     }
 }
