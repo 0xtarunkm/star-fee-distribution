@@ -1,0 +1,8 @@
+[package]
+name = "damm_v2"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+anchor-lang = { workspace = true }
+bytemuck = { workspace = true, features = ["derive", "min_const_generics"] }
